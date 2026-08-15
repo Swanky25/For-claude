@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+.vite/
+
+# Raw training corpus: only the generated model is committed.
+corpus/
+
+# Screenshot written by scripts/smoke.mjs
+ui.png
