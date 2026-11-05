@@ -9,3 +9,6 @@ corpus/
 
 # Screenshot written by scripts/smoke.mjs
 ui.png
+
+__pycache__/
+.pytest_cache/
