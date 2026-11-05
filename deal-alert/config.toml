@@ -3,9 +3,9 @@
 # rules of its category. Edit freely; no code changes needed.
 
 [global]
-country_domain = "amazon.in"     # Amazon storefront to search
-currency = "₹"
-min_discount_pct = 40            # you asked for 40-50%+ off
+country_domain = "amazon.com"    # Amazon storefront to search
+currency = "$"
+min_discount_pct = 40            # you asked for 40-50%+ off the list price
 min_rating = 4.0                 # "best ones": well rated...
 min_reviews = 100                # ...by enough buyers to trust the rating
 pages_per_query = 2              # Amazon result pages to scan per search
@@ -16,7 +16,7 @@ request_delay_seconds = 4        # be polite between requests
 # Community deal feeds (RSS/Atom). Items are matched to categories by keyword.
 # They carry no star rating, so they are labelled "community deal" in alerts.
 community_feeds = [
-  "https://www.desidime.com/deals.rss",
+  "https://slickdeals.net/newsearch.php?mode=frontpage&searcharea=deals&searchin=first&rss=1",
 ]
 
 [[category]]
@@ -24,14 +24,14 @@ name = "Vacuum cleaner"
 queries = ["vacuum cleaner", "robot vacuum cleaner", "wet and dry vacuum cleaner", "cordless vacuum cleaner"]
 must_match_any = ["vacuum"]
 exclude = ["bag", "spare", "replacement", "brush roll", "side brush", "hose", "nozzle", "accessor", "compatible", "hepa filter", "filter for", "kit for", "cover for"]
-min_price = 2000
+min_price = 50
 
 [[category]]
 name = "Mop"
-queries = ["spin mop", "floor cleaning mop", "electric spin mop", "steam mop"]
+queries = ["spin mop with bucket", "steam mop", "electric spin mop", "cordless wet dry vacuum mop"]
 must_match_any = ["mop"]
 exclude = ["refill", "replacement", "pad only", "head only", "refill pad", "mop pads", "spare", "compatible"]
-min_price = 400
+min_price = 15
 
 [[category]]
 name = "TV 50 inch and above"
@@ -39,11 +39,11 @@ queries = ["50 inch smart tv", "55 inch 4k smart tv", "65 inch smart tv", "75 in
 must_match_any = ["tv", "television"]
 exclude = ["mount", "stand", "remote", "cover", "bracket", "cable", "screen guard", "protector", "trolley"]
 min_screen_inches = 50
-min_price = 15000
+min_price = 150
 
 [[category]]
-name = "Water filter / purifier"
-queries = ["ro water purifier", "ro uv water purifier", "uv water purifier", "tap water filter"]
-must_match_any = ["purifier", "water filter"]
-exclude = ["candle", "cartridge", "replacement", "membrane", "spare", "service kit", "pre filter", "pre-filter", "sediment", "spun", "compatible", "pipe", "booster pump", "adapter"]
-min_price = 500
+name = "Water filter"
+queries = ["reverse osmosis water filter system", "under sink water filter", "water filter pitcher", "faucet water filter", "whole house water filter"]
+must_match_any = ["water filter", "filtration", "reverse osmosis", "purifier"]
+exclude = ["replacement", "refill", "cartridge", "membrane", "spare", "compatible", "pack of", "filters only", "fridge filter", "refrigerator water filter", "shower head", "adapter"]
+min_price = 20

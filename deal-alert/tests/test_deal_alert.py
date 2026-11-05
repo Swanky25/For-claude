@@ -38,7 +38,7 @@ def test_amazon_parse_and_tv_filter(config):
     assert len(products) == 5
     good = products[0]
     assert good.title.startswith("Acme 139 cm")   # "Sponsored Ad - " stripped
-    assert (good.price, good.mrp, good.rating, good.reviews) == (32999, 69990, 4.4, 12345)
+    assert (good.price, good.mrp, good.rating, good.reviews) == (329.99, 699.99, 4.4, 12345)
     assert good.discount_pct == 52.9
 
     tv = cats["tv"]
@@ -59,8 +59,8 @@ def test_captcha_detected():
 def test_feed_parse_and_filters(config):
     g, cats = config
     items = parse_feed((FIX / "feed.xml").read_text())
-    assert items[0].price == 8499 and items[0].mrp == 18500
-    assert items[1].price == 649 and items[1].discount_pct == pytest.approx(62, abs=0.5)
+    assert items[0].price == 269.99 and items[0].mrp == 599.99
+    assert items[1].price == 19.99 and items[1].discount_pct == pytest.approx(55, abs=0.5)
     water = [p.id for p in select_deals(items, cats["water"], g)]
     mop = [p.id for p in select_deals(items, cats["mop"], g)]
     assert water == ["https://example.com/d/1"]

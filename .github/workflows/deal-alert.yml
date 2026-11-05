@@ -2,7 +2,7 @@ name: Deal Alert
 
 on:
   schedule:
-    - cron: "17 2,6,10,14 * * *"   # 07:47, 11:47, 15:47, 19:47 IST
+    - cron: "17 0,12,16,20 * * *"   # ~8am, 12pm, 4pm, 8pm US Eastern (7/11/3/7 during winter)
   workflow_dispatch: {}
 
 permissions:

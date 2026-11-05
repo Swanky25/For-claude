@@ -5,16 +5,16 @@ categories and messages you when it finds one:
 
 | Category | What counts |
 |---|---|
-| Vacuum cleaner | Any vacuum (robot, wet & dry, cordless…), accessories/spares excluded, ≥ ₹2,000 |
-| Mop | Spin / electric / steam mops, refills & pads excluded, ≥ ₹400 |
-| TV | **50 inches and above** only (size read from the title, inches or cm), mounts/remotes excluded |
-| Water filter | RO / UV purifiers and tap filters, candles/cartridges/membranes excluded |
+| Vacuum cleaner | Any vacuum (robot, stick, cordless, wet & dry…), accessories/spares excluded, ≥ $50 |
+| Mop | Spin / steam / electric mops and wet-dry floor cleaners, refills & pads excluded, ≥ $15 |
+| TV | **50 inches and above** only (size read from the title), mounts/remotes excluded, ≥ $150 |
+| Water filter | Reverse osmosis, under-sink, whole-house, pitcher and faucet filters; replacement cartridges excluded |
 
 ## What "best ones for best prices" means here
 
 A product is alerted only if **all** of these hold (all editable in `config.toml`):
 
-- **≥ 40% off** the listed MRP
+- **≥ 40% off** the list price
 - **≥ 4.0 stars** from **≥ 100 ratings**, so a 5-star item with 7 reviews doesn't count
 - It is the real product, not an accessory (keyword and minimum-price filters)
 - At most the **top 5 per category** each run, ranked by discount plus rating
@@ -23,8 +23,8 @@ A product is alerted only if **all** of these hold (all editable in `config.toml
 It remembers what it already sent (`state.json`) and only alerts again if the
 price drops another 5%.
 
-**Sources:** Amazon.in search results, plus community deal feeds (RSS) for deals
-from other stores. Feed deals have no star rating, so they're marked
+**Sources:** Amazon.com search results, plus the Slickdeals front-page feed (RSS)
+for deals from Walmart, Best Buy, Target and other stores. Feed deals have no star rating, so they're marked
 *"community deal: check reviews"*.
 
 ## Setup (≈5 minutes, free)
@@ -67,7 +67,10 @@ pip install pytest && python -m pytest tests
   likely to be blocked.
 - Store page layouts change. If Amazon results suddenly drop to 0, the HTML
   selectors in `deal_alert/sources.py` need updating.
-- "MRP" is the store's listed price, and stores sometimes inflate it.
-  Treat a 70%-off TV with suspicion and compare prices before buying.
-- Flipkart isn't scraped directly (its markup changes very often); its deals
-  arrive through the community feeds instead.
+- The "list price" is set by the seller and is sometimes inflated.
+  Treat a 70%-off TV with suspicion and check its price history on
+  camelcamelcamel.com before buying.
+- Walmart, Best Buy and Target aren't scraped directly (they block bots
+  heavily); their deals arrive through the Slickdeals feed instead. Slickdeals
+  posts often omit the list price, so only posts that state one (e.g. "Reg. $599")
+  can be checked against the 40% rule.

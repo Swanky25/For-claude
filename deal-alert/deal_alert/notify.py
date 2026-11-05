@@ -21,7 +21,7 @@ def _money(v: float | None, cur: str) -> str:
 
 def format_text(p: Product, cur: str) -> str:
     lines = [f"[{p.category}] {p.title[:110]}",
-             f"  {_money(p.price, cur)} (MRP {_money(p.mrp, cur)}) - {p.discount_pct:.0f}% OFF"]
+             f"  {_money(p.price, cur)} (list {_money(p.mrp, cur)}) - {p.discount_pct:.0f}% OFF"]
     if p.source == "community":
         lines.append("  community deal - no rating data, check reviews before buying")
     else:

@@ -20,7 +20,7 @@ class Product:
     title: str
     url: str
     price: float | None
-    mrp: float | None = None
+    mrp: float | None = None    # list / "was" price
     rating: float | None = None
     reviews: int | None = None
     category: str = ""

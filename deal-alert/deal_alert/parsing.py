@@ -53,9 +53,9 @@ def parse_discount_from_text(text: str) -> float | None:
     return float(m.group(1)) if m else None
 
 
-def parse_rupee_amounts(text: str) -> list[float]:
-    """All amounts written as Rs/₹/INR followed by a number."""
+def parse_money_amounts(text: str) -> list[float]:
+    """All amounts written as $/USD (or ₹/Rs) followed by a number."""
     return [
         float(x.replace(",", ""))
-        for x in re.findall(r"(?:₹|rs\.?|inr)\s*(\d[\d,]*(?:\.\d+)?)", text, re.I)
+        for x in re.findall(r"(?:\$|usd\s*|₹|rs\.?\s*)(\d[\d,]*(?:\.\d+)?)", text, re.I)
     ]

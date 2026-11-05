@@ -15,7 +15,7 @@ from .parsing import (
     parse_discount_from_text,
     parse_price,
     parse_rating,
-    parse_rupee_amounts,
+    parse_money_amounts,
 )
 
 log = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ HEADERS = {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/130.0 Safari/537.36"
     ),
-    "Accept-Language": "en-IN,en;q=0.9",
+    "Accept-Language": "en-US,en;q=0.9",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
@@ -34,7 +34,7 @@ class BlockedError(RuntimeError):
     """The store served a captcha / bot-check page instead of results."""
 
 
-def parse_amazon_search(html: str, domain: str = "amazon.in") -> list[Product]:
+def parse_amazon_search(html: str, domain: str = "amazon.com") -> list[Product]:
     if "captcha" in html.lower() and "s-search-result" not in html:
         raise BlockedError("Amazon returned a captcha page")
     soup = BeautifulSoup(html, "html.parser")
@@ -98,7 +98,7 @@ def fetch_amazon(category: Category, domain: str, pages: int, delay: float,
 
 
 def parse_feed(xml_text: str) -> list[Product]:
-    """Parse RSS 2.0 or Atom into Products (price/MRP inferred from the title)."""
+    """Parse RSS 2.0 or Atom into Products (price/list price inferred from the text)."""
     root = ET.fromstring(xml_text)
     atom = "{http://www.w3.org/2005/Atom}"
     entries = []
@@ -114,7 +114,7 @@ def parse_feed(xml_text: str) -> list[Product]:
     products = []
     for title, link, desc in entries:
         text = f"{title} {BeautifulSoup(desc, 'html.parser').get_text(' ')}"
-        amounts = parse_rupee_amounts(text)
+        amounts = parse_money_amounts(text)
         price = min(amounts) if amounts else None
         mrp = max(amounts) if len(amounts) > 1 else None
         stated = parse_discount_from_text(text)
